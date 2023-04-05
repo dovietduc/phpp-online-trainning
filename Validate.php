@@ -2,6 +2,7 @@
 
 require(__DIR__ . '/Validate/RequiredValidate.php');
 require(__DIR__ . '/Validate/EmailValidate.php');
+require(__DIR__ . '/Validate/MinValidate.php');
 
 class Validate {
 
@@ -14,7 +15,8 @@ class Validate {
 
     private $ruleMapClass = [
         'required' => RequiredValidate::class,
-        'email' => EmailValidate::class
+        'email' => EmailValidate::class,
+        'min' => MinValidate::class
     ];
 
     public function __construct($dataForm) 
@@ -35,10 +37,14 @@ class Validate {
             $valueField = $this->dataForm[$fieldName];
 
             foreach($rules as $rule) {
+
+                $ruleArray = explode(":", $rule);
+                $ruleName = $ruleArray[0];
+                $optionalParams = end($ruleArray);
                 
                 // thuc hien validate // solid
-                $className = $this->ruleMapClass[$rule];
-                $instanceClass = new $className();
+                $className = $this->ruleMapClass[$ruleName];
+                $instanceClass = new $className($optionalParams);
 
                 // check validate pass for rule
                 $isValidatePass = $instanceClass->passValidate($valueField);

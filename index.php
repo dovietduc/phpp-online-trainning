@@ -14,6 +14,7 @@ $rules = [
     'email' => [
         'required',
         'email',
+        'min:3'
     ]
 ];
 $validate = new Validate($dataForm);
