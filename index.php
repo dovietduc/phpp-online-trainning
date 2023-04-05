@@ -5,7 +5,7 @@ require(__DIR__ . '/Validate.php');
 // init data
 $dataForm = [
     'name' => '',
-    'email' => ''
+    'email' => 'duc.do@gmail.com'
 ];
 $rules = [
     'name' => [
@@ -14,7 +14,8 @@ $rules = [
     'email' => [
         'required',
         'email',
-        'min:3'
+        'min:3',
+        'between:3,10'
     ]
 ];
 $validate = new Validate($dataForm);
