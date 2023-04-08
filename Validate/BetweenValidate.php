@@ -20,8 +20,11 @@ class BetweenValidate {
         return false;
     }
 
-    public function showMessage($fieldName) 
+    public function showMessage($fieldName, $message) 
     {
+        if($message) {
+            return $message;
+        }
 
         return $fieldName . ' must beween ' . $this->min . ' and ' . $this->max;
 

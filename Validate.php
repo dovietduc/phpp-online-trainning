@@ -13,6 +13,8 @@ class Validate {
 
     private $errors = [];
 
+    private $messages = [];
+
 
     private $ruleMapClass = [
         'required' => RequiredValidate::class,
@@ -52,8 +54,10 @@ class Validate {
                 // check validate pass for rule
                 $isValidatePass = $instanceClass->passValidate($valueField);
                 if(!$isValidatePass) {
+                    $keyMessage = $fieldName . '.' . $ruleName;
+                    $message = $this->messages[$keyMessage] ?? null;
                     // add message error
-                    $this->errors[$fieldName][] = $instanceClass->showMessage($fieldName);
+                    $this->errors[$fieldName][] = $instanceClass->showMessage($fieldName, $message);
                     
                 }
 
@@ -62,6 +66,11 @@ class Validate {
 
         }
         
+    }
+
+    public function setMessages($messages) 
+    {
+        $this->messages = $messages;
     }
 
     public function getErrors() 

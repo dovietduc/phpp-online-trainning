@@ -11,9 +11,12 @@ class EmailValidate {
         return false;
     }
 
-    public function showMessage($fieldName) 
+    public function showMessage($fieldName, $message) 
     {
 
+        if($message) {
+            return $message;
+        }
         return $fieldName . ' need true format email';
 
     }

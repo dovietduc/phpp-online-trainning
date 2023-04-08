@@ -18,8 +18,14 @@ $rules = [
         'between:3,10'
     ]
 ];
+$messages = [
+    'name.required' => 'ban khong duoc phep de trong ten',
+    'email.between' => 'email ban phai nhap tu 3 den 10 ki tu',
+
+];
 $validate = new Validate($dataForm);
 $validate->setRules($rules);
+$validate->setMessages($messages);
 
 
 // call method validate
